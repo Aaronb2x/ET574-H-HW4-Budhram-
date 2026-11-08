@@ -77,7 +77,25 @@ class TestDiceGame(unittest.TestCase):
 
     # --- Students: Add 3 more test cases below ---
 
+    def test_evaluate_roll_boundaries(self):
+        # 6 and 8 sit next to 7, so they roll again
+        self.assertEqual(self.game.evaluate_roll(6), "Roll Again")
+        self.assertEqual(self.game.evaluate_roll(8), "Roll Again")
+        # 2 and 12 are the extremes, so they lose
+        self.assertEqual(self.game.evaluate_roll(2), "Lose")
+        self.assertEqual(self.game.evaluate_roll(12), "Lose")
 
+    def test_play_round_total_matches_dice(self):
+        for _ in range(50):
+            d1, d2, total, result = self.game.play_round()
+            self.assertEqual(total, d1 + d2)
+            self.assertEqual(result, self.game.evaluate_roll(total))
+
+    def test_custom_sided_die(self):
+        die = Die(max_side=20)
+        self.assertEqual(die.sides, 20)
+        for _ in range(100):
+            self.assertIn(die.roll(), range(1, 21))
 
 
 
