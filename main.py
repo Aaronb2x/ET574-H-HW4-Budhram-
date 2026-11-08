@@ -30,3 +30,25 @@ class DiceGame:
         total = d1 + d2
         result = self.evaluate_roll(total)
         return d1, d2, total, result
+
+def main():
+    game = DiceGame()
+    while True:
+        print("\n=== Dice Game ===")
+        print("1. Play a round")
+        print("2. Exit")
+        choice = input("Choose an option: ")
+
+        if choice == "1":
+            d1, d2, total, result = game.play_round()
+            print(f"You rolled {d1} and {d2} (total: {total})")
+            print(f"Result: {result}")
+        elif choice == "2":
+            print("Thanks for playing!")
+            break
+        else:
+            print("Invalid choice, enter 1 or 2.")
+
+
+if __name__ == "__main__":
+    main()
